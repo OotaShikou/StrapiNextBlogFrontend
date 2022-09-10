@@ -18,9 +18,7 @@ const Home: NextPage = () => {
           <Button variant="contained">Contained</Button>
           <Button variant="outlined">Outlined</Button>
         </Stack>
-        ...
       </main>
-      ...
     </div>
   )
 }
