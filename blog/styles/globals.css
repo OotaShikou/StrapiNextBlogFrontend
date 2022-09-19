@@ -1,3 +1,33 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+
+article{
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+article pre{
+    background: #222;
+    color: #eee;
+    padding: 8px;
+    wordbreak: break-all;
+    overflow: scroll
+}
+
+article h1{
+    font-size: 1.8rem;
+    font-weight:bold;
+}
+
+article h2{
+    font-size: 1.4rem;
+    border-bottom: 1px solid #A3A3A3;
+	padding: 0.2em 0.5em;
+	border-left: solid 5px #27acd9;
+    font-weight:bold;
+}
+
+article p{
+    font-size: 1.15rem;
+}

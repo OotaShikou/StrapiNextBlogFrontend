@@ -1,26 +1,32 @@
 import type {InferGetStaticPropsType, NextPage } from 'next'
-import Typography from '@mui/material/Typography';
 import CommonMeta from '../../components/CommonMeta/CommonMeta'
-import ReactMarkdown from 'react-mark';
-import { Grid } from '@mui/material';
-import { useRouter } from "next/router";
-
+import ReactMarkdown from 'react-mark'
+import {AccordionDetails, AccordionSummary, Accordion, Box, Button, Grid, Typography } from '@mui/material'
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import CustomizedAccordions from "../../components/Nav/Nav"
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>
 
-const Article: NextPage<Props> = ( {article,category} ) => {
+const Article: NextPage<Props> = ( {article,category,post_id} ) => {
   return (
     <>
       <CommonMeta
         title={article.attributes.title}
         description={article.attributes.description}
       />
-      <Grid container className="pt-5">
-        <Grid item xs={12} md={4}>
-          menu
+      <Grid container>
+        <Grid
+          className='mt-3'
+          item xs={12} md={3}
+        >
+          <CustomizedAccordions
+            article_id={article.attributes.category.data.id}
+            category={category}
+            post_id={post_id}
+          />
         </Grid>
-        <Grid item xs={12} md={8}>
-          <article>
+        <Grid className="pt-5" item xs={12} md={9}>
+          <article className="pl-2 pr-2">
             <ReactMarkdown>{article.attributes.content}</ReactMarkdown>
           </article>
         </Grid>
@@ -30,19 +36,14 @@ const Article: NextPage<Props> = ( {article,category} ) => {
 }
 
 export const getStaticPaths = async () => {
-  // 外部APIエンドポイントを呼び出しデータ取得
   const res_article=await fetch(`https://strapi-production-66a0.up.railway.app/api/blogs`)
   const articles = await res_article.json()  
 
-  // 事前ビルドしたいパスを指定
   const paths = articles.data.map((article: any) => ({
     params: {
-      // ファイル名と合わせる ※文字列指定
       id: article.id.toString(),
     },
   }))
-  // paths：事前ビルドするパス対象を指定するパラメータ
-  // fallback：事前ビルドしたパス以外にアクセスしたときのパラメータ true:カスタム404Pageを表示 false:404pageを表示
   return { paths, fallback: false }
 }
 
@@ -64,7 +65,8 @@ export const getStaticProps = async (params: any) => {
     props:{
       // categories: categories || null,
       article: article || null,
-      category: category || null
+      category: category || null,
+      post_id: post_id,
     }
   }
 }

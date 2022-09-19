@@ -56,7 +56,7 @@ export const Header = memo((props: Props) => {
 
   return (
     <Box sx={{ display: 'flex', mb:7 }}>
-      <AppBar component="nav">
+      <AppBar component="nav" sx={{ background:"#21182a" }}>
         <Toolbar sx={{ display: "flex", justifyContent:"space-between", width:"full"}}>
             <Image src='/logo_white.png' width="120" height="40" alt='OotaCodeBolg' />
           <IconButton
