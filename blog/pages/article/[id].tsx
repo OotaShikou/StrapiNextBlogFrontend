@@ -1,13 +1,14 @@
 import type {InferGetStaticPropsType, NextPage } from 'next'
 import CommonMeta from '../../components/CommonMeta/CommonMeta'
-import ReactMarkdown from 'react-mark'
-import {AccordionDetails, AccordionSummary, Accordion, Box, Button, Grid, Typography } from '@mui/material'
-import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import { Grid } from '@mui/material'
 import CustomizedAccordions from "../../components/Nav/Nav"
+import ReactMarkdown from "react-markdown";
+import CodeBlock from "../../components/CodeBlock/CodeBlock"
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>
 
 const Article: NextPage<Props> = ( {article,category,post_id} ) => {
+
   return (
     <>
       <CommonMeta
@@ -27,7 +28,12 @@ const Article: NextPage<Props> = ( {article,category,post_id} ) => {
         </Grid>
         <Grid className="pt-5" item xs={12} md={9}>
           <article className="pl-2 pr-2">
-            <ReactMarkdown>{article.attributes.content}</ReactMarkdown>
+            <ReactMarkdown
+              children={article.attributes.content}
+              components={{
+                code: CodeBlock,
+              }}
+            />
           </article>
         </Grid>
       </Grid>
@@ -44,6 +50,7 @@ export const getStaticPaths = async () => {
       id: article.id.toString(),
     },
   }))
+
   return { paths, fallback: false }
 }
 

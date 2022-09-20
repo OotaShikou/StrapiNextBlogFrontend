@@ -7,14 +7,6 @@ article{
     font-family: 'Noto Sans JP', sans-serif;
 }
 
-article pre{
-    background: #222;
-    color: #eee;
-    padding: 8px;
-    wordbreak: break-all;
-    overflow: scroll
-}
-
 article h1{
     font-size: 1.8rem;
     font-weight:bold;

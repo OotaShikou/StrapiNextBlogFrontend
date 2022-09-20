@@ -19,6 +19,6 @@
   "exclude": ["node_modules"],
   "baseUrl": "./",
   "paths": {
-    "@/*": ["./"]
+    "@/*": ["./node_modules/*"]
   }
 }
