@@ -20,7 +20,7 @@ const CodeBlock = (
     return (
       <SyntaxHighlighter
         style={atomDark}
-        language={lang ? lang : "js"}
+        language={lang ? lang : "bash"}
         children={String(children).replace(/\n$/, '')}
       />
     );

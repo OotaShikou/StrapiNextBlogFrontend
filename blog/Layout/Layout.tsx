@@ -10,7 +10,7 @@ export const Layout = ({ children }: LayoutProps) => (
   <>
     <Header />
     {children}
-    <Footer />
+    <Footer description="サンプル" title="oota code" />
   </>
 )
 

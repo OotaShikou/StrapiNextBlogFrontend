@@ -1,7 +1,7 @@
 import type {InferGetStaticPropsType, NextPage } from 'next'
 import Typography from '@mui/material/Typography';
 import CommonMeta from '../../components/CommonMeta/CommonMeta'
-import ReactMarkdown from 'react-mark';
+import ReactMarkdown from 'react-markdown';
 
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>
