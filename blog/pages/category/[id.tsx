@@ -1,11 +1,12 @@
 import type {InferGetStaticPropsType, NextPage } from 'next'
 import Typography from '@mui/material/Typography';
 import CommonMeta from '../../components/CommonMeta/CommonMeta'
+import ReactMarkdown from 'react-markdown';
 
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>
 
-const Category: NextPage<Props> = ( {blog} ) => {
+const CategoryArticleList: NextPage<Props> = ( {blog} ) => {
   return (
     <>
       <CommonMeta></CommonMeta>
@@ -18,6 +19,9 @@ const Category: NextPage<Props> = ( {blog} ) => {
           <Typography variant="h6" sx={{ my: 2 }}>
             {item.attributes.meta_description}
           </Typography>
+          <article>
+           <ReactMarkdown>{item.attributes.content}</ReactMarkdown>
+          </article>
           <Typography sx={{ my: 2 }}>
             {item.attributes.updatedAt}
           </Typography>
@@ -30,10 +34,10 @@ const Category: NextPage<Props> = ( {blog} ) => {
 
 export const getStaticProps = async () => {
 
-  const res=await fetch("https://code-ota-blog.herokuapp.com/admin")
+  const res=await fetch("https://strapi-production-66a0.up.railway.app/api/categories/1?populate=*")
   const posts=await res.json();
-  console.log(posts.data.attributes.blogs);
-
+  
+  // console.log(posts.data.attributes.blogs)
   const blog = posts.data.attributes.blogs
   
 
@@ -44,4 +48,4 @@ export const getStaticProps = async () => {
   }
 }
 
-export default Category
+export default CategoryArticleList
