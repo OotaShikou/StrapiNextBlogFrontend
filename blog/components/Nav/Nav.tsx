@@ -62,21 +62,23 @@ export default function CustomizedAccordions(
               {item.attributes.name}
               </Typography>
           </AccordionSummary>
-          <AccordionDetails>
-            {item.attributes.blogs.data.map((item: any) => (
-              <Box sx={{ ml: 3 }} key={item.id}>
-                <Button 
-                  href={"/article/" + item.id}
-                  disabled = {post_id == item.id}
-                  size="small"
-                >
-                  <Typography variant="button" className = {post_id == item.id ? "text-blue-600" : "text-slate-500"}>
-                    {item.attributes.title}
-                  </Typography>
-                </Button>
-              </Box>
-            ))}
-          </AccordionDetails>
+          <Box>
+            <AccordionDetails>
+              {item.attributes.blogs.data.map((item: any) => (
+                <Box sx={{ ml: 3 }} key={item.id}>
+                  <Button 
+                    href={"/article/" + item.id}
+                    disabled = {post_id == item.id}
+                    size="small"
+                  >
+                    <Typography variant="button" className = {post_id == item.id ? "text-blue-600" : "text-slate-500"}>
+                      {item.attributes.title}
+                    </Typography>
+                  </Button>
+                </Box>
+              ))}
+            </AccordionDetails>
+          </Box>
         </Accordion>
       </div>
       ))}

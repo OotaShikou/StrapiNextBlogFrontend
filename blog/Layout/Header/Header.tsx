@@ -24,7 +24,7 @@ interface Props {
 }
 
 const drawerWidth = 240;
-const navItems = ['Home', 'About', 'Contact'];
+const navItems = [['Home',"/"], ['Category',"/category"], ['Twitter',"https://twitter.com/Icjtx472UVjO195"]];
 
 export const Header = memo((props: Props) => {
   const { window } = props;
@@ -42,9 +42,9 @@ export const Header = memo((props: Props) => {
       <Divider />
       <List>
         {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }}>
-              <ListItemText primary={item} />
+          <ListItem key={item[0]} disablePadding>
+            <ListItemButton href={item[1]} sx={{ textAlign: 'center' }}>
+              <ListItemText primary={item[0]} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -70,8 +70,8 @@ export const Header = memo((props: Props) => {
           </IconButton>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: '#fff' }}>
-                {item}
+              <Button href={item[1]} key={item[0]} sx={{ color: '#fff' }}>
+                {item[0]}
               </Button>
             ))}
           </Box>

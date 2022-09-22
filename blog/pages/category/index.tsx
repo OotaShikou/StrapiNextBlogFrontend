@@ -28,7 +28,7 @@ const CategoryArticle: NextPage<Props> = ( {category} ) => {
               </Typography>
             </CardContent>
             <CardActions sx={{ display: "flex", justifyContent: "center", pb:2 }}>
-              <Button sx={{ background: "#9c27b0 !important" }} size="small" color="secondary" variant="contained">Lead Article</Button>
+              <Button href={`/category/${item.id}`} sx={{ background: "#9c27b0 !important" }} size="small" color="secondary" variant="contained">Lead Article</Button>
             </CardActions>
           </Card>
         ))}
