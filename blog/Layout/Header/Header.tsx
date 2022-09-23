@@ -24,7 +24,8 @@ interface Props {
 }
 
 const drawerWidth = 240;
-const navItems = [['Home',"/"], ['Category',"/category"], ['Twitter',"https://twitter.com/Icjtx472UVjO195"]];
+// ['Home',"/"],
+const navItems = [ ['Category',"/category"], ['Twitter',"https://twitter.com/Icjtx472UVjO195"]];
 
 export const Header = memo((props: Props) => {
   const { window } = props;

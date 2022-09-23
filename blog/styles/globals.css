@@ -30,9 +30,11 @@ article h2 {
 }
 
 article p {
-    font-size: 1.15rem;
-    letter-spacing: 2px;
-    line-height: 1.6;
+    font-size: 0.98rem;
+    letter-spacing: 2.2px;
+    line-height: 1.7;
+    color: #222;
+    font-weight:600
 }
 
 article a {
@@ -86,4 +88,5 @@ article blockquote p {
     padding: 0;
     margin: 10px 0;
     line-height: 1.7;
+    font-size: 0.95rem
 }

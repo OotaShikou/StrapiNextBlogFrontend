@@ -1,11 +1,14 @@
 import type {InferGetStaticPropsType, NextPage } from 'next'
 import CommonMeta from '../../components/CommonMeta/CommonMeta'
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import {
+   CardContent,
+   CardActions,
+   Card, 
+   Breadcrumbs, 
+   Typography, 
+   Box, Button,
+   Link
+} from '@mui/material';
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>
 
@@ -13,6 +16,12 @@ const CategoryArticle: NextPage<Props> = ( {category} ) => {
   return (
     <>
       <CommonMeta></CommonMeta>
+      <Breadcrumbs sx={{ pt: 4 }} aria-label="breadcrumb">
+          <Link underline="hover" color="inherit">
+            Home
+          </Link>
+          <Typography color="text.primary">Category</Typography>
+      </Breadcrumbs>
       <Box sx={{ display:"flex", justifyContent:"center", margin:"auto", flexWrap:"wrap" }}>
         {category.map((item: any) => (
           <Card sx={{ width: 275, margin: 2, display:"flex", flexDirection:"column", justifyContent:"space-between" }}  key={item.id}>

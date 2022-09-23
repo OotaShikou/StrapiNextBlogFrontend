@@ -7,7 +7,7 @@ import MuiAccordionSummary, {
 } from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import { Box, Button, Typography } from '@mui/material';
-import Image from 'next/image';
+// import { useState } from 'react';
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -52,11 +52,11 @@ export default function CustomizedAccordions(
     };
 
   return (
-    <Box className='sticky top-16'>
+    <Box className='sticky'>
       {category.map((item: any) => (
-      <div key={item.id}>
+      <Box key={item.id}>
         <Accordion expanded={expanded === item.id} onChange={handleChange(item.id)}>
-          <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
+          <AccordionSummary sx={{ p: 0 }} aria-controls="panel1d-content" id="panel1d-header">
             <Typography className="font-bold flex items-center">
               <img width="26" className='mr-2' src={item.attributes.icon.data.attributes.url}/>
               {item.attributes.name}
@@ -65,7 +65,7 @@ export default function CustomizedAccordions(
           <Box>
             <AccordionDetails>
               {item.attributes.blogs.data.map((item: any) => (
-                <Box sx={{ ml: 3 }} key={item.id}>
+                <Box sx={{ ml: 3, }} key={item.id}>
                   <Button 
                     href={"/article/" + item.id}
                     disabled = {post_id == item.id}
@@ -80,7 +80,7 @@ export default function CustomizedAccordions(
             </AccordionDetails>
           </Box>
         </Accordion>
-      </div>
+      </Box>
       ))}
     </Box>
   );

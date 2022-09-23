@@ -1,28 +1,30 @@
 import type {InferGetStaticPropsType, NextPage } from 'next'
-import Typography from '@mui/material/Typography';
 import CommonMeta from '../../components/CommonMeta/CommonMeta'
-import { Grid, Box, Autocomplete, TextField, Card, CardActionArea } from '@mui/material';
+import { Grid, Box, Autocomplete, TextField, Card, CardActionArea, Typography, Breadcrumbs, Link} from '@mui/material';
 import { useState } from 'react';
+import Profile from "../../components/Profile/Profile";
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>
 
-const CategoryArticleList: NextPage<Props> = ( {blog} ) => {
-  let serch_option:any = []
-  for (let i = 0; i < blog.attributes.blogs.data.length; i++) {
-    const label = blog.attributes.blogs.data[i].attributes.title
-    serch_option.push(label)
-  }
+const CategoryArticleList: NextPage<Props> = ( {blog,serch_option} ) => {
+
   const [value, setValue] = useState<string | null>("");
   const [inputValue, setInputValue] = useState('');
   return (
     <>
       <CommonMeta></CommonMeta>
-      <Grid container spacing={2} sx={{ pt: 5, mb: 3,justifyContent: "center"}}>
-        <Grid item xs={12} md={8}>
+      <Breadcrumbs sx={{ pt: 4 }} aria-label="breadcrumb">
+          <Link underline="hover" color="inherit">
+            Home
+          </Link>
+          <Link underline="hover" color="inherit" href="/category">
+            Category
+          </Link>
+          <Typography color="text.primary">{blog.attributes.name}</Typography>
+      </Breadcrumbs>
+      <Grid container spacing={2} sx={{ pt: 2, mb: 3,justifyContent: "center"}}>
+        <Grid item xs={12} md={9}>
           <Box sx={{ background: "white", p: 2, borderRadius: 1 }}>
-            <Typography variant="h4" sx={{ fontWeight: "bold",fontSize: "1.2rem" }}>
-              {blog.attributes.name}の記事一覧
-            </Typography>
             <Autocomplete
               value={value}
               freeSolo
@@ -34,24 +36,25 @@ const CategoryArticleList: NextPage<Props> = ( {blog} ) => {
                 setInputValue(newInputValue);
               }}
               options={serch_option}
-              sx={{ width: 300, mt: 2 }}
-              renderInput={(params) => <TextField {...params} label="記事を検索" />}
+              sx={{ width: 300, mb: 2 }}
+              size="small"
+              renderInput={(params) => <TextField {...params} label={`${blog.attributes.name}の記事を検索`} />}
             />
 
           {blog.attributes.blogs.data.map((item: any) => (
             (
               item.attributes.title.indexOf(value) !== -1
               || item.attributes.title.indexOf(inputValue) !== -1 
-            ) && <Box key={item.id} className='mt-3'>
+            ) && <Box key={item.id}>
               <Card variant="outlined" sx={{ border: "none" }}>
                 <CardActionArea className='px-3 py-2' href={`/article/${item.id}`}>
-                  <Typography>
+                  <Typography sx={{ fontSize: "0.8rem", fontWeight: "bold" ,color:"#999"}}>
                     {item.attributes.updatedAt.substring(0,10)}
                   </Typography>
-                  <Typography variant="h5">
+                  <Typography variant="h5" sx={{ fontSize: "1.1rem", fontWeight: "bold" ,color:"#222"}}>
                     {item.attributes.title}
                   </Typography>
-                  <Typography>
+                  <Typography sx={{ fontWeight: "500",fontSize: "0.92rem" ,color:"#222" }}>
                     {item.attributes.description}
                   </Typography>
                 </CardActionArea>
@@ -61,11 +64,9 @@ const CategoryArticleList: NextPage<Props> = ( {blog} ) => {
           ))}
           </Box> 
         </Grid>
-        <Grid item xs={12} md={4}>
-          <Box sx={{ background: "white", borderRadius: 1, p: 2   }}>
-            <Card variant="outlined">
-                Icon
-            </Card>
+        <Grid item xs={12} md={3}>
+          <Box sx={{ background: "white", borderRadius: 1, p: 2, maxHeight: "400px" }} >
+            <Profile></Profile>
           </Box>
         </Grid>
       </Grid>
@@ -96,9 +97,16 @@ export const getStaticProps = async (params: any) => {
   // console.log(posts.data.attributes.blogs)
   const blog = posts.data
 
+  let serch_option:any = []
+  for (let i = 0; i < blog.attributes.blogs.data.length; i++) {
+    const label = blog.attributes.blogs.data[i].attributes.title
+    serch_option.push(label)
+  }
+
   return {
     props:{
       blog: blog || null,
+      serch_option
     }
   }
 }
