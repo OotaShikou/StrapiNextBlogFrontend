@@ -52,7 +52,7 @@ export default function CustomizedAccordions(
     };
 
   return (
-    <Box className='w-4/5 sticky top-16'>
+    <Box className='sticky top-16'>
       {category.map((item: any) => (
       <div key={item.id}>
         <Accordion expanded={expanded === item.id} onChange={handleChange(item.id)}>

@@ -1,6 +1,6 @@
 import type {InferGetStaticPropsType, NextPage } from 'next'
 import CommonMeta from '../../components/CommonMeta/CommonMeta'
-import { Grid } from '@mui/material'
+import { Grid, Box } from '@mui/material'
 import CustomizedAccordions from "../../components/Nav/Nav"
 import ReactMarkdown from "react-markdown";
 import CodeBlock from "../../components/CodeBlock/CodeBlock"
@@ -15,26 +15,29 @@ const Article: NextPage<Props> = ( {article,category,post_id} ) => {
         title={article.attributes.title}
         description={article.attributes.description}
       />
-      <Grid container>
+      <Grid container spacing={2} sx={{ pt: 5, pb: 2 }}>
+        <Grid item xs={12} md={9}>
+          <Box sx={{ background: "white", borderRadius: 1, p: 2 }}>
+            <article>
+              <ReactMarkdown
+                children={article.attributes.content}
+                components={{
+                  code: CodeBlock,
+                }}
+              />
+            </article>
+          </Box>
+        </Grid>
         <Grid
-          className='mt-3'
           item xs={12} md={3}
         >
-          <CustomizedAccordions
-            article_id={article.attributes.category.data.id}
-            category={category}
-            post_id={post_id}
-          />
-        </Grid>
-        <Grid className="pt-5" item xs={12} md={9}>
-          <article className="pl-2 pr-2">
-            <ReactMarkdown
-              children={article.attributes.content}
-              components={{
-                code: CodeBlock,
-              }}
+          <Box sx={{ background: "white", borderRadius: 1, p: 2 }}>
+            <CustomizedAccordions
+              article_id={article.attributes.category.data.id}
+              category={category}
+              post_id={post_id}
             />
-          </article>
+          </Box>
         </Grid>
       </Grid>
     </>

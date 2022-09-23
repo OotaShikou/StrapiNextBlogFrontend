@@ -17,12 +17,12 @@ const CategoryArticleList: NextPage<Props> = ( {blog} ) => {
   return (
     <>
       <CommonMeta></CommonMeta>
-      <Grid container >
-        <Grid className='p-3 mt-5 mb-3 mx-auto' item xs={12} md={10}>
-          <Typography sx={{ pt: 4, mb: 3 ,mx: 3 }} variant="h4">
-            {blog.attributes.name}の記事一覧
-          </Typography>
-          <Box className='mx-3'>
+      <Grid container spacing={2} sx={{ pt: 5, mb: 3,justifyContent: "center"}}>
+        <Grid item xs={12} md={8}>
+          <Box sx={{ background: "white", p: 2, borderRadius: 1 }}>
+            <Typography variant="h4" sx={{ fontWeight: "bold",fontSize: "1.2rem" }}>
+              {blog.attributes.name}の記事一覧
+            </Typography>
             <Autocomplete
               value={value}
               freeSolo
@@ -34,18 +34,16 @@ const CategoryArticleList: NextPage<Props> = ( {blog} ) => {
                 setInputValue(newInputValue);
               }}
               options={serch_option}
-              sx={{ width: 300 }}
+              sx={{ width: 300, mt: 2 }}
               renderInput={(params) => <TextField {...params} label="記事を検索" />}
             />
-          </Box> 
-        </Grid>
-        <Grid className='mt-3 mx-auto' item xs={12} md={10}>
+
           {blog.attributes.blogs.data.map((item: any) => (
             (
               item.attributes.title.indexOf(value) !== -1
               || item.attributes.title.indexOf(inputValue) !== -1 
-            ) && <Box key={item.id} className='mt-3 mx-3'>
-              <Card className='border-0' variant="outlined">
+            ) && <Box key={item.id} className='mt-3'>
+              <Card variant="outlined" sx={{ border: "none" }}>
                 <CardActionArea className='px-3 py-2' href={`/article/${item.id}`}>
                   <Typography>
                     {item.attributes.updatedAt.substring(0,10)}
@@ -58,8 +56,17 @@ const CategoryArticleList: NextPage<Props> = ( {blog} ) => {
                   </Typography>
                 </CardActionArea>
               </Card>
+              <hr />
             </Box>
           ))}
+          </Box> 
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <Box sx={{ background: "white", borderRadius: 1, p: 2   }}>
+            <Card variant="outlined">
+                Icon
+            </Card>
+          </Box>
         </Grid>
       </Grid>
     </>

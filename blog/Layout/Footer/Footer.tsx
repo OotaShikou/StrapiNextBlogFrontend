@@ -23,7 +23,7 @@ function Copyright() {
 export const Footer = memo(() => {
 
   return (
-    <Box component="footer" sx={{ bgcolor: 'background.paper', py: 6 }}>
+    <Box component="footer" sx={{ pt: 3, pb: 6, borderRadius: 1 }}>
       <Container maxWidth="lg">
         <Copyright />
 
